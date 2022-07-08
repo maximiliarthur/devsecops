@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET"])
 def first():
-    result = "Hellow World"
+    result = "Hello World"
     return (result)
 
 @app.route("/version", methods=["GET"])
