@@ -27,10 +27,13 @@ jobs:
         run: python -m unittest test.py
  
   security:
-    
+    needs: build
     runs-on: ubuntu-latest
     
     steps:
+      
+      - uses: actions/checkout@v3
+      
       - name: Try 
         run: ls -la
 
