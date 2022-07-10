@@ -29,7 +29,7 @@ jobs:
   security:
     needs: build
     runs-on: ubuntu-latest
-    
+    name: gitleaks scan
     steps:
       - uses: actions/checkout@v3
 
