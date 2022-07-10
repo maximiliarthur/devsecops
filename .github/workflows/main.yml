@@ -45,6 +45,4 @@ jobs:
       - name: Try 
         run: |
           ls -la
-          pwd
-          ls -la /github/workspace/
 

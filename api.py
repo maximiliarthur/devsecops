@@ -4,7 +4,7 @@ from flask import Flask, jsonify
 
 app = Flask(__name__)
 
-DBPassword = "shkqhjhwgkqbskqwkjqwh"
+aws_key = "AKIAIOSFODNN7EXAMPLE"
 
 @app.route("/", methods=["GET"])
 def first():
