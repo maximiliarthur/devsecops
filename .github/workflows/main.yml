@@ -29,10 +29,10 @@ jobs:
   security:
     needs: build
     runs-on: ubuntu-latest
-    name: gitleaks scan
     steps:
       - uses: actions/checkout@v3
-
+        with:
+          fetch-depth: 0
       - name: Gitleaks
         uses: gitleaks/gitleaks-action@v2
         env:
