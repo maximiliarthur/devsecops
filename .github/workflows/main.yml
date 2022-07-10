@@ -39,10 +39,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITLEAKS_ENABLE_UPLOAD_ARTIFACT: false
 
-      - name: trufflehog
-        run: |
-          docker run --workdir "/github/workspace/" -v "$(pwd)":"/github/workspace/" --rm hysnsec/trufflehog --repo_path /github/workspace/ file:///src --json | tee trufflehog-output.json
-        
+      - name: run scan-secret
+        uses: ./actions/scan-secret     
+  
       - name: Try 
         run: |
           ls -la
