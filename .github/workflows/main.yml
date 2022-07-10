@@ -47,4 +47,5 @@ jobs:
         run: |
           ls -la
           pwd
+          ls -la /github/workspace/
 
