@@ -44,5 +44,7 @@ jobs:
           docker run -v $(pwd):/src --rm hysnsec/trufflehog --repo_path /src file:///src --json | tee trufflehog-output.json
         
       - name: Try 
-        run: ls -la
+        run: |
+          ls -la
+          pwd
 
