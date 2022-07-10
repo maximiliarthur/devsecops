@@ -4,6 +4,8 @@ from flask import Flask, jsonify
 
 app = Flask(__name__)
 
+secret = "shkqhjhwgkqbskqwkjqwh"
+
 @app.route("/", methods=["GET"])
 def first():
     result = "Hello World"
