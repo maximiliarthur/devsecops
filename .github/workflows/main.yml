@@ -41,7 +41,7 @@ jobs:
 
       - name: trufflehog
         run: |
-          - docker run --user $(id -u):$(id -g) -v $(pwd):/src --rm hysnsec/trufflehog file:///src
+          docker run --user $(id -u):$(id -g) -v $(pwd):/src --rm hysnsec/trufflehog file:///src
         
       - name: Try 
         run: ls -la
