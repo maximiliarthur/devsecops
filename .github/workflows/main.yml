@@ -41,7 +41,10 @@ jobs:
 
       - name: trufflehog
         run: |
-          docker run -v $(pwd):/src --rm hysnsec/trufflehog --repo_path /src file:///src --json | tee trufflehog-output.json
+          docker run --workdir "/github/workspace/" \
+          -v "$(pwd)":"/github/workspace/" --rm hysnsec/trufflehog \ 
+          --repo_path /github/workspace/ \ 
+          file:///src --json | tee trufflehog-output.json
         
       - name: Try 
         run: |
