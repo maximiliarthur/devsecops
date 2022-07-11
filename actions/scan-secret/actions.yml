@@ -11,3 +11,4 @@ runs:
     - name: run scan-secret
       run: docker run -v $(pwd):/path zricethezav/gitleaks:latest detect -c "/path/actions/scan-secret/gitleaks.toml" -s "/path" --no-git -r "/path/output.json" ---exit-code 0
       shell: bash
+      
