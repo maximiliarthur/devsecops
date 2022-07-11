@@ -8,17 +8,12 @@ runs:
     - name: run scan-secret
       run: |
 
-        ls -la /
+        # ls -la /
         
-        docker build -t zricethezav/gitleaks:v7.4.0 \
-        -f "$(pwd)/actions/scan-secret/Dockerfile" "$(pwd)/actions/scan-secret"
+        # docker build -t zricethezav/gitleaks:latest \
+        # -f "$(pwd)/actions/scan-secret/Dockerfile" "$(pwd)/actions/scan-secret"
 
 
-        docker run --rm --mount type=bind,source=$(pwd)/../,target=/github/workspace \
-        zricethezav/gitleaks:v7.4.0 \
-        --path "/github/workspace" \
-        --redact  --config-path "/github/workspace/actions/scan-secret/gitleaks.toml" \
-        --no-git --report /github/workspace/output.json \
-        --leaks-exit-code=1
+        docker run -v $(pwd):/path zricethezav/gitleaks:latest detect -c "/path/actions/scan-secret/gitleaks.toml" -s "/path" --no-git -r "/path/output.json" ---exit-code 0
 
       shell: bash
