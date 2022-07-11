@@ -7,7 +7,10 @@ runs:
   steps:
     - name: run scan-secret
       run: |
-        /usr/bin/docker build -t zricethezav/gitleaks:v7.4.0 \
+
+        ls -la /
+
+        docker build -t zricethezav/gitleaks:v7.4.0 \
         -f "$(pwd)/actions/scan-secret/Dockerfile" "$(pwd)/actions/scan-secret"
 
 
@@ -18,6 +21,5 @@ runs:
         --no-git --report /github/workspace/output.json \
         --leaks-exit-code=1
         
-        docker inspect devtest
 
       shell: bash
