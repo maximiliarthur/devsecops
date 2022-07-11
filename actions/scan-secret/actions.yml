@@ -2,27 +2,6 @@
 name: scan-secret
 description: scan secrets in code repository
 
-inputs:
-
-  tool-version:
-    description: version of scan-secret
-    required: true
-
-  tool-workingpath:
-    description: tool working path
-    required: false
-    default: /github/workspace/code
-
-  tool-output:
-    description: tool working path
-    required: false
-    default: /github/workspace/output.json
-
-  gitleaks-configpath:
-    description: gitleaks config path
-    required: false
-    default: /github/workspace/actions/scan-secret/gitleaks.toml
-
 runs:
   using: composite
   steps:
@@ -30,16 +9,16 @@ runs:
       run: |
 
         ls -la /
-
+        
         docker build -t zricethezav/gitleaks:v7.4.0 \
         -f "$(pwd)/actions/scan-secret/Dockerfile" "$(pwd)/actions/scan-secret"
 
 
-        docker run --workdir /github/workspace/code --rm \
-        -v "$(pwd)":"/github/workspace" \
+        docker run --rm --mount type=bind,source=$(pwd)/../,target=/github/workspace \
         zricethezav/gitleaks:v7.4.0 \
-        "${{ inputs.gitleaks-configpath }}" \
-        "${{ inputs.tool-workingpath }}" \
-        "${{ inputs.tool-output }}"
+        --path "/github/workspace" \
+        --redact  --config-path "/github/workspace/actions/scan-secret/gitleaks.toml" \
+        --no-git --report /github/workspace/output.json \
+        --leaks-exit-code=1
 
       shell: bash
