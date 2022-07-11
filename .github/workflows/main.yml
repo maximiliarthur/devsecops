@@ -31,8 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-           fetch-depth: 0
+      - run: ls -la
 #       - name: Gitleaks
 #         uses: gitleaks/gitleaks-action@v2
 #         env:
@@ -41,7 +40,7 @@ jobs:
 
       - name: run scan-secret
         uses: ./actions/scan-secret     
-  
+      
       - name: Try 
         run: |
           ls -la
