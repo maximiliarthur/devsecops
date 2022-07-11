@@ -9,13 +9,15 @@ runs:
       run: |
         /usr/bin/docker build -t zricethezav/gitleaks:v7.4.0 \
         -f "$(pwd)/actions/scan-secret/Dockerfile" "$(pwd)/actions/scan-secret"
-        pwd
-        /usr/bin/docker run --rm \
-        -v "$(pwd)":"/github/workspace/" zricethezav/gitleaks:v7.4.0 \
-        --path "/github/workspace/" \
+
+
+        docker run --rm --mount type=bind,source=$(pwd),target=/github/workspace \
+        zricethezav/gitleaks:v7.4.0 \
+        --path "/github/workspace" \
         --redact  --config-path "/github/workspace/actions/scan-secret/gitleaks.toml" \
         --no-git --report /github/workspace/output.json \
         --leaks-exit-code=1
-        ls -la
+        
+        docker inspect devtest
 
       shell: bash
